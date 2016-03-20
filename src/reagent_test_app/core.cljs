@@ -41,12 +41,14 @@
     {:style {:background "black" :color "white"}}
     [:h2 {:style {:margin "10px 0"}} "Header"]]])
 
-(defn test-input []
+(defn test-input [new-post]
   [:div.row {:style {:margin-top "24px"}}
    [:div.col-lg-8.col-lg-offset-2
     [:form {:on-submit handle-submit}
      [:input.form-control
       {:type "text"
+       :value new-post
+       :auto-focus true
        :on-change handle-change}]]]])
 
 (defn test-post [post]
@@ -81,7 +83,7 @@
 (defn test-app []
   [:div.container-fluid
    [test-header]
-   [test-input]
+   [test-input (:new-post @app-state)]
    [test-post-list (reverse (:posts @app-state))]])
 
 (reagent/render-component [test-app]
